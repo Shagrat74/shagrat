@@ -83,3 +83,23 @@ if(is_dir(APP.DS.'libraries')){
 if(is_dir(APP.DS.'helpers')){
     define('HELP', APP.DS.'helpers');
 }
+
+// Definizione percorso directory core di sistema
+if(is_dir(SYS.DS.'core')){
+    define('CORE', SYS.DS.'core');
+}
+// Definizione percorso directory librerie di sistema
+if(is_dir(SYS.DS.'libraries')){
+    define('SYSTEM_LIB', SYS.DS.'libraries');
+}
+
+// Definizione percorso directory helpers di sistema
+if(is_dir(SYS.DS.'helpers')){
+    define('SYSTEM_HELP', SYS.DS.'helpers');
+}
+
+// Definizione percorso directory database
+if(is_dir(SYS.DS.'database')){
+    define('DB_PATH', SYS.DS.'database');
+}
+

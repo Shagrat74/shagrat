@@ -14,3 +14,10 @@ define('DS', '/');
 if(is_dir(PATH.DS.'config') && is_readable(PATH.DS.'config'.DS.'paths.php')){
     require_once PATH.DS.'config'.DS.'paths.php';
 }
+
+// Require del controller principale di sistema
+if(is_readable(CORE.DS.'ControllerIndex.php')){
+    require_once CORE.DS.'ControllerIndex.php';
+}else{
+    echo'no';
+}
