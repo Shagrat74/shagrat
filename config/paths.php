@@ -1,4 +1,4 @@
-<?php
+<?php defined('PATH') or die();
 
 /*
  * File contenente i percorsi assoluti del framework
@@ -82,6 +82,21 @@ if(is_dir(APP.DS.'libraries')){
 // Definizione percorso helpers dell'applicazione
 if(is_dir(APP.DS.'helpers')){
     define('HELP', APP.DS.'helpers');
+}
+
+// Definizione percorso routes dell'applicazione
+if(is_dir(APP.DS.'routes')){
+    define('ROUTES', APP.DS.'routes');
+}
+
+// Definizione percorso routes publiche dell'applicazione
+if(is_dir(ROUTES.DS.'public')){
+    define('P_ROUTES', ROUTES.DS.'public');
+}
+
+// Definizione percorso routes di amministrazione dell'applicazione
+if(is_dir(ROUTES.DS.'admin')){
+    define('A_ROUTES', ROUTES.DS.'admin');
 }
 
 // Definizione percorso directory core di sistema
