@@ -8,7 +8,7 @@ class ControllerIndex{
     public function __construct(){
         
         self::config_files();
-        $this->routing=self::routing();
+        //self::routing();
         
     }
     
@@ -27,8 +27,9 @@ class ControllerIndex{
         if(is_readable(CORE.DS.'Routing.php')){
             require_once CORE.DS.'Routing.php';
             $routing=new Routing();
+        }else{
+            die('Si è verificato un errore. Verificare il corretto funzionamento dei file di sistema');
         }
-        return $routing;
     }
     
 }
