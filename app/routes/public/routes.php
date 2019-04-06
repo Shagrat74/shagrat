@@ -8,29 +8,44 @@
  * Route principale
  * Deve necessariamente trovarsi prima di tutte le altre routes
  */
+
 $routes[]=array(
-    'name'=>'',
-    'controller'=>BASE_CONTROLLER,
-    'args'=>false
+    'name'=>'Home',
+    'method_name'=>'',
+    'controller'=>'Home',
+    'method'=>'',
+    'args'=>0,
+    'admin'=>false
 );
+
 
 /*
  * Routes
  */
+
+$routes[]=array(
+    'name'=>'prova3',
+    'method_name'=>'',
+    'controller'=>'Controller1',
+    'method'=>'',
+    'args'=>0,
+    'admin'=>false
+);
+
 $routes[]=array(
     'name'=>'prova',
+    'method_name'=>'riprova',
     'controller'=>'Controller1',
-    'args'=>false
+    'method'=>'sprova',
+    'args'=>0,
+    'admin'=>false
 );
 
 $routes[]=array(
     'name'=>'prova2',
+    'method_name'=>'riprova',
     'controller'=>'Controller2',
-    'args'=>false
-);
-
-$routes[]=array(
-    'name'=>'prova3',
-    'controller'=>'Controller2',
-    'args'=>false
+    'method'=>'sprova2',
+    'args'=>2,
+    'admin'=>false
 );

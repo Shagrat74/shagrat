@@ -14,13 +14,34 @@ class Routing{
         $this->uri=self::split_url();
         $this->routes=self::get_routes();
         self::router($this->uri);
-        print_r($this->uri);
+    }
+    
+    private function setRouteController($uri){
+        $route=array();
+        foreach($this->routes as $routes){
+            if($uri[1]===$routes['name'] && $routes['method_name']===''){
+                $route=$routes;
+                break;
+            }
+        }
+        return $route;
+    }
+    
+    private function setRouteMethod($uri){
+        $route=array();
+        foreach($this->routes as $routes){
+            if($uri[1]===$routes['name'] && $uri[2]===$routes['method_name'] && $routes['args']===(count($uri)-3)){
+                $route=$routes;
+                break;
+            }
+        }
+        return $route;
     }
     
     private function split_url(){
         $uri=$_SERVER['REQUEST_URI'];
         if(substr($uri, -1)=='/'){
-            $uri=substr($uri, 0, strlen($stringa)-1);
+            $uri=substr($uri, 0, strlen($uri)-1);
         }
         $uri=explode('/', $uri);
         array_shift($uri);
@@ -35,91 +56,68 @@ class Routing{
         return $routes;
     }
     
-    private function verify_route($route){
-        $controllers=self::get_controllers();
-        require_once CTR.DS.$route['controller'].'.php';
-        $res=true;
-        if(!in_array($route['controller'], $controllers)){
-            $res=false;
-        }
-        if(!method_exists($route['controller'], $route['method']) && $route['method']!=null){
-            $res=false;
-        }
-        if($route['args']===true && !isset($this->uri[3])){
-            $res=false;
-        }
-        return $res;
-    }
-    
-    private function get_controllers(){
-        $controllers=array();
-        foreach(scandir(CTR) as $controller){
-            if($controller=='index.php' || $controller=='.' || $controller=='..'){
-                continue;
-            }else if(is_readable(CTR.DS.$controller)){
-                    $controller=str_replace('.php', '', $controller);
-                    $controllers[]=$controller;
+    private function getRoute($uri){
+        $route=array();
+        if(count($uri)===1){
+            $route=$this->routes[0];
+        }else if(count($uri)===2){
+            $route=self::setRouteController($uri);
+            if(count($route)<1){
+                $route=false;
+            }
+        }else if(count($uri)>=3){
+            $route=self::setRouteMethod($uri);
+            if(count($route)<1){
+                $route=false;
             }
         }
-        return $controllers;
+        return $route;
     }
     
-    private function setMethod($route){
+    private function getMethod($route){
         $method='';
         if($route['method']===''){
             $method='index';
         }else{
-            $method=$route['method'];
+            if(self::verifyMethod($route['method'], $route['controller'])){
+                $method=$route['method'];
+            }else{
+                $method=false;
+            }
         }
         return $method;
     }
     
-    private function goto_route($route){
-        if(self::verify_route($route)){
-            require_once CTR.DS.$route['controller'].'.php';
-            $controller=new $route['controller'];
-            $method=self::setMethod($route);
-            $controller->$method();
+    private function verifyMethod($method, $controller){
+        if(method_exists($controller, $method)){
+            return true;
         }else{
-            echo 'La route ha problemi mentali';
+            return false;
         }
     }
     
+    private function getArgs($uri){
+        $args=array();
+        for($i=3; $i<count($uri); $i++){
+            $args[]=$uri[$i];
+        }
+        return $args;
+    }
+    
     private function router($uri){
-        $route=array();
-        /*if(!isset($uri[1])){
-            $route=$this->routes[0];
-            if(self::verify_route($route)){
-                require_once CTR.DS.$route['controller'].'.php';
-                $controller=new $route['controller'];
-                $method=self::setMethod($route);
+        $route=self::getRoute($uri);
+        if($route===false || count($uri)===0){
+            echo '404';
+        }else{
+            require_once CTR.DS.$route['controller'].'.php';
+            $controller=new $route['controller'];
+            $method=self::getMethod($route);
+            if(count($uri)<=3){
                 $controller->$method();
             }else{
-                echo '404';
+                $args=self::getArgs($uri);
+                $controller->$method($args);
             }
-        }else{
-            foreach($this->routes as $route){
-                if($uri[1]==$route['name']){
-                    if(self::verify_route($route)){
-                        require_once CTR.DS.$route['controller'].'.php';
-                        $controller=new $route['controller'];
-                        $method=self::setMethod($route);
-                        $controller->$method();
-                    }else{
-                        echo '404';
-                    }
-                    break;
-                }else{
-                    continue;
-                }
-            }
-        }*/
-        if(count($uri)===1){
-            echo '1';
-        }else if(count($uri)===2){
-            echo '2';
-        }else if(count($uri)>=3){
-            
         }
     }
     

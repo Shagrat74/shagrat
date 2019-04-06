@@ -1,7 +1,11 @@
 <?php
 
-class Controller1{
+class Controller1 extends ControllerIndex{
     public function index(){
-        echo 'c1';
+        echo 'index controller 1';
+    }
+    
+    public function sprova(){
+        echo 'maledetta la vita';
     }
 }
