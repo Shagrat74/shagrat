@@ -1,4 +1,4 @@
-<?php
+<?php defined('PATH') or die();
 
 class Controller1 extends ControllerIndex{
     public function index(){

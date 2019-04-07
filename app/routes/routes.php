@@ -40,12 +40,3 @@ $routes[]=array(
     'args'=>0,
     'admin'=>false
 );
-
-$routes[]=array(
-    'name'=>'prova2',
-    'method_name'=>'riprova',
-    'controller'=>'Controller2',
-    'method'=>'sprova2',
-    'args'=>2,
-    'admin'=>false
-);
