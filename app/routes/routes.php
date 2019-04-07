@@ -10,9 +10,9 @@
  */
 
 $routes[]=array(
-    'name'=>'Home',
+    'name'=>BASE_CONTROLLER,
     'method_name'=>'',
-    'controller'=>'Home',
+    'controller'=>BASE_CONTROLLER,
     'method'=>'',
     'args'=>0,
     'admin'=>false

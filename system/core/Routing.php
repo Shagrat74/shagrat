@@ -50,8 +50,10 @@ class Routing{
     
     private function get_routes(){
         $routes=array();
-        if(is_readable(P_ROUTES.DS.'routes.php')){
-            require_once P_ROUTES.DS.'routes.php';
+        if(is_readable(ROUTES.DS.'routes.php')){
+            require_once ROUTES.DS.'routes.php';
+        }else{
+            die('Si è verificato un problema con le routes. Verificare l\'esistenza e la leggibilità del file Routes.php');
         }
         return $routes;
     }

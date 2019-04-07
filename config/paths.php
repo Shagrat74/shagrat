@@ -89,16 +89,6 @@ if(is_dir(APP.DS.'routes')){
     define('ROUTES', APP.DS.'routes');
 }
 
-// Definizione percorso routes publiche dell'applicazione
-if(is_dir(ROUTES.DS.'public')){
-    define('P_ROUTES', ROUTES.DS.'public');
-}
-
-// Definizione percorso routes di amministrazione dell'applicazione
-if(is_dir(ROUTES.DS.'admin')){
-    define('A_ROUTES', ROUTES.DS.'admin');
-}
-
 // Definizione percorso directory core di sistema
 if(is_dir(SYS.DS.'core')){
     define('CORE', SYS.DS.'core');

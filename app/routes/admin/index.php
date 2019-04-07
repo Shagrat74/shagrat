@@ -1,1 +1,0 @@
-<?php defined('PATH') or die(); ?>
