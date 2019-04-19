@@ -2,6 +2,6 @@
 
 class Home extends ControllerIndex{
     public function index(){
-        echo 'Home Page';
+        $this->load->view('home');
     }
 }
